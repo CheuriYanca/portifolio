@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #101942;
+            --burgundy: #80043a;
+            --pink: #f60c49;
+            --peach: #f09580;
+            --cream: #fdf2b4;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--navy);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: var(--navy);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            color: var(--cream);
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--peach) !important;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 10px 15px !important;
+        }
+
+        .nav-link:hover {
+            color: var(--cream) !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--burgundy) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 100px 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p.lead {
+            font-size: 1.4rem;
+            color: var(--peach);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn-primary {
+            background-color: var(--pink);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(246, 12, 73, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--burgundy);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(246, 12, 73, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--cream);
+            border: 2px solid var(--cream);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--cream);
+            color: var(--navy);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: rgba(16, 25, 66, 0.95);
+            padding: 100px 0;
+        }
+
+        .section-title {
+            color: var(--cream);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 100%;
+            height: 3px;
+            background: var(--pink);
+        }
+
+        .feature-box {
+            background: rgba(128, 4, 58, 0.2);
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: all 0.3s;
+            height: 100%;
+            border: 1px solid rgba(128, 4, 58, 0.3);
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-color: var(--pink);
+        }
+
+        .feature-icon {
+            height: 80px;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--burgundy);
+            border-radius: 50%;
+            margin-bottom: 25px;
+            color: var(--cream);
+            font-size: 2rem;
+        }
+
+        .feature-title {
+            color: var(--cream);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .feature-text {
+            color: var(--peach);
+            margin-bottom: 0;
+        }
+
+        /* About/Product Section */
+        .product-section {
+            background: linear-gradient(135deg, rgba(16, 25, 66, 0.9) 0%, rgba(128, 4, 58, 0.9) 100%), url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .product-img {
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            border: 3px solid var(--pink);
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-content h2 {
+            color: var(--cream);
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .product-content p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .product-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .product-feature i {
+            color: var(--pink);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .product-feature-text h4 {
+            color: var(--cream);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .product-feature-text p {
+            color: var(--peach);
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background-color: var(--navy);
+            padding: 100px 0;
+        }
+
+        .testimonial-card {
+            background: rgba(128, 4, 58, 0.1);
+            border-radius: 15px;
+            padding: 40px 30px;
+            border: 1px solid var(--burgundy);
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-color: var(--pink);
+        }
+
+        .testimonial-text {
+            color: var(--peach);
+            font-style: italic;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid var(--burgundy);
+        }
+
+        .testimonial-name {
+            color: var(--cream);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .testimonial-position {
+            color: var(--peach);
+            font-size: 0.9rem;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: linear-gradient(135deg, var(--navy) 0%, rgba(128, 4, 58, 0.8) 100%);
+            padding: 100px 0;
+        }
+
+        .pricing-card {
+            background: rgba(16, 25, 66, 0.9);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--burgundy);
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--pink);
+        }
+
+        .pricing-header {
+            padding: 30px;
+            text-align: center;
+            background: rgba(128, 4, 58, 0.3);
+        }
+
+        .pricing-title {
+            color: var(--cream);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price {
+            color: var(--pink);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        .pricing-duration {
+            color: var(--peach);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .pricing-body {
+            padding: 30px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+        }
+
+        .pricing-features li {
+            color: var(--peach);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(128, 4, 58, 0.2);
+        }
+
+        .pricing-features li i {
+            color: var(--cream);
+            margin-right: 10px;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--pink);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured .pricing-header {
+            background: var(--burgundy);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--pink);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--pink) 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            background-color: white;
+            color: var(--burgundy);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background-color: var(--cream);
+        }
+
+        /* Contact Form */
+        .contact-section {
+            background-color: var(--navy);
+            padding: 100px 0;
+        }
+
+        .contact-form {
+            background: rgba(16, 25, 66, 0.8);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--burgundy);
+        }
+
+        .contact-form .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--burgundy);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .contact-form .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .contact-form .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(246, 12, 73, 0.3);
+            border-color: var(--pink);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(16, 25, 66, 0.95);
+            padding: 80px 0 30px;
+        }
+
+        .footer-logo {
+            color: var(--cream);
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-text {
+            color: var(--peach);
+            margin-bottom: 30px;
+        }
+
+        .footer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-list li {
+            margin-bottom: 15px;
+        }
+
+        .footer-list li a {
+            color: var(--peach);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-list li a:hover {
+            color: var(--cream);
+            padding-left: 5px;
+        }
+
+        .footer-title {
+            color: var(--cream);
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+        }
+
+        .footer-contact li {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact li i {
+            color: var(--pink);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: var(--burgundy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cream);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--pink);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(128, 4, 58, 0.3);
+        }
+
+        .footer-bottom p {
+            color: var(--peach);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        /* Animations */
+        .animate-fade-in {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media Queries */
+        @media (max-width: 991px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .pricing-card.featured {
+                transform: scale(1);
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p.lead {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .contact-form {
+                padding: 30px;
+            }
+            .product-section {
+                padding: 80px 0;
+            }
+            .product-img {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">BRAND NAME</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#recursos">Recursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#produto">Produto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#preços">Preços</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content animate-fade-in">
+                    <h1>Solução inovadora para seu negócio</h1>
+                    <p class="lead">Descubra como nossa plataforma pode transformar a maneira como você trabalha e alcançar resultados extraordinários.</p>
+                    <p>Nossa solução completa ajuda empresas de todos os tamanhos a aumentar produtividade e reduzir custos operacionais.</p>
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <a href="#preços" class="btn btn-primary">Comece Agora</a>
+                        <a href="#produto" class="btn btn-outline">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block text-center">
+                    <img src="/api/placeholder/600/500" alt="Product Preview" class="img-fluid animate-slide-up rounded" style="max-height: 500px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="recursos">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Nossos Recursos</h2>
+                <p class="text-light">Descubra por que nossos clientes escolhem nossa solução</p>
+            </div>
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="feature-title">Alta Performance</h3>
+                        <p class="feature-text">Sistema otimizado que garante velocidade e eficiência em todas as operações, mesmo com grandes volumes de dados.</p>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Segurança Avançada</h3>
+                        <p class="feature-text">Proteção de dados com criptografia de última geração e conformidade com os mais rigorosos padrões internacionais.</p>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Analytics Completo</h3>
+                        <p class="feature-text">Painéis de controle intuitivos com métricas em tempo real para tomar decisões baseadas em dados concretos.</p>
+                    </div>
+                </div>
+                <!-- Feature 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="feature-title">Customização Total</h3>
+                        <p class="feature-text">Adapte o sistema às suas necessidades específicas com opções de personalização flexíveis e intuitivas.</p>
+                    </div>
+                </div>
+                <!-- Feature 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Integração Simples</h3>
+                        <p class="feature-text">Conecte facilmente com suas ferramentas existentes através de APIs robustas e integrações pré-construídas.</p>
+                    </div>
+                </div>
+                <!-- Feature 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="feature-title">Suporte 24/7</h3>
+                        <p class="feature-text">Equipe de especialistas disponível a qualquer momento para garantir o funcionamento ininterrupto da sua solução.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product/About Section -->
+    <section class="product-section" id="produto">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <img src="/api/placeholder/600/600" alt="Product Details" class="product-img img-fluid">
+                </div>
+                <div class="col-lg-6 product-content">
+                    <h2>Um produto pensado para o seu crescimento</h2>
+                    <p>Nossa plataforma foi desenvolvida com foco em resultados reais para sua empresa. Combinamos tecnologia de ponta com uma interface intuitiva para oferecer a melhor experiência possível.</p>
+                    
+                    <div class="product-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="product-feature-text">
+                            <h4>Interface Intuitiva</h4>
+                            <p>Design moderno e fácil de usar que não exige treinamento técnico extensivo.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="product-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="product-feature-text">
+                            <h4>Escalabilidade</h4>
+                            <p>Cresce junto com seu negócio, adaptando-se a novos desafios e volumes de trabalho.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="product-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="product-feature-text">
+                            <h4>Tecnologia Cloud</h4>
+                            <p>Acesse de qualquer lugar, a qualquer momento, com total segurança e disponibilidade.</p>
+                        </div>
+                    </div>
+                    
+                    <a href="#preços" class="btn btn-primary mt-4">Ver Planos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">O Que Nossos Clientes Dizem</h2>
+                <p class="text-light">Experiências reais de quem já transformou seu negócio</p>
+            </div>
+            <div class="row">
+                <!-- Testimonial 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Desde que implementamos esta solução, nossa produtividade aumentou em 47%. A interface intuitiva e o suporte excepcional fizeram toda a diferença."</p>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/60/60" alt="Author" class="testimonial-avatar">
+                            <div>
+                                <h5 class="testimonial-name">Ana Silva</h5>
+                                <p class="testimonial-position">CEO, Empresa XYZ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"As ferramentas de analytics nos permitiram identificar oportunidades que não tínhamos visibilidade antes. Resultado: crescimento de 32% em vendas no primeiro semestre."</p>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/60/60" alt="Author" class="testimonial-avatar">
+                            <div>
+                                <h5 class="testimonial-name">Pedro Costa</h5>
+                                <p class="testimonial-position">Diretor Comercial, Startup ABC</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"A integração foi surpreendentemente fácil e o suporte técnico sempre esteve disponível para resolver qualquer dúvida. Definitivamente uma escolha acertada."</p>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/60/60" alt="Author" class="testimonial-avatar">
+                            <div>
+                                <h5 class="testimonial-name">Mariana Torres</h5>
+                                <p class="testimonial-position">CTO, Tech Solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="preços">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Planos e Preços</h2>
+                <p class="text-light">Escolha o plano ideal para o seu negócio</p>
+            </div>
+            <div class="row g-4">
+                <!-- Basic Plan -->
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Básico</h3>
+                            <h2 class="pricing-price">R$99</h2>
+                            <p class="pricing-duration">por mês</p>
+                        </div>
+                        <div class="pricing-body">
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> Até 5 usuários</li>
+                                <li><i class="fas
